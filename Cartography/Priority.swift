@@ -22,6 +22,7 @@ precedencegroup CarthographyPriorityPrecedence {
 }
 
 infix operator  ~: CarthographyPriorityPrecedence
+infix operator  ~~: CarthographyPriorityPrecedence
 
 /// Sets the priority for a constraint.
 ///
@@ -43,8 +44,8 @@ infix operator  ~: CarthographyPriorityPrecedence
 ///
 /// - returns: The same constraint with its priority updated.
 ///
-@discardableResult public func ~ (lhs: NSLayoutConstraint, rhs: Float) -> NSLayoutConstraint {
-    lhs.priority = LayoutPriority(rawValue: rhs)
+@discardableResult public func ~~ (lhs: NSLayoutConstraint, rhs: Float) -> NSLayoutConstraint {
+    lhs.priority = LayoutPriority(rhs)
 
     return lhs
 }
@@ -62,15 +63,3 @@ infix operator  ~: CarthographyPriorityPrecedence
     }
 }
 
-/// Sets the priority for multiple constraints.
-///
-/// - parameter lhs: An array of `NSLayoutConstraint` instances.
-/// - parameter rhs: The new priority.
-///
-/// - returns: The same constraints with their priorities updated.
-///
-@discardableResult public func ~ (lhs: [NSLayoutConstraint], rhs: Float) -> [NSLayoutConstraint] {
-    return lhs.map {
-        $0 ~ rhs
-    }
-}
